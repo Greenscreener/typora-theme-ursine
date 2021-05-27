@@ -10,6 +10,10 @@ const buildStyles = () => {
   console.log("Compiling CSS files...");
   sass.compiler = require("node-sass");
 
+  const gs = src(["*-gs.scss"])
+    .pipe(sass({ outputStyle: "expanded" }).on("error", sass.logError))
+    .pipe(dest("dist/ursine-gs"));
+
   const regular = src(["*.scss", "!*-cyrillic.scss", "!*-alt.scss"])
     .pipe(sass({ outputStyle: "expanded" }).on("error", sass.logError))
     .pipe(dest("dist/ursine"));
@@ -26,6 +30,12 @@ const buildStyles = () => {
 };
 
 const includeAssets = () => {
+  const gs = src([
+    "ursine/*.png",
+    "ursine/FiraMono-*.ttf",
+	"baskerville-font/*.ttf"
+  ]).pipe(dest("dist/ursine-gs/ursine"));
+
   const regular = src([
     "ursine/*.png",
     "ursine/FiraMono-*.ttf",

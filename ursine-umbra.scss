@@ -23,6 +23,13 @@ $alt-font: false !default;
   $header-font: "'Roboto Slab', 'Times New Roman', serif";
 }
 
+$gs-font: false !default;
+@if $gs-font {
+	$paragraph-font: "'Libre Baskerville', 'Roboto Slab', serif";
+	$header-font: "'Libre Baskerville', 'Roboto Slab', serif";
+	$monospace-font: "'Fira Code', 'Fira Mono', 'Cousine', 'Consolas', monospace";
+}
+
 // Important colors for writing (text, links, code, etc.)
 $bg-color: #1e2022 !default;
 $text-color: #ddd !default;
@@ -94,8 +101,26 @@ $mermaid-task-crit-fill: #d66979 !default;
 $mermaid-task-crit-border: #8f1d22 !default;
 
 // FONT-FACES //
-
-@if $cyrillic-font {         // Cyrillic font-faces
+@if $gs-font {
+	@font-face {
+	  font-family: "Libre Baskerville";
+	  font-style: normal;
+	  font-weight: normal;
+	  src: local("Libre Baskerville Regular"), url("./ursine/LibreBaskerville-Regular.ttf") format("tff");
+	}
+	@font-face {
+	  font-family: "Libre Baskerville";
+	  font-style: normal;
+	  font-weight: bold;
+	  src: local("Libre Baskerville Bold"), url("./ursine/LibreBaskerville-Bold.ttf") format("tff");
+	}
+	@font-face {
+	  font-family: "Libre Baskerville";
+	  font-style: italic;
+	  font-weight: normal;
+	  src: local("Libre Baskerville Italic"), url("./ursine/LibreBaskerville-Italic.ttf") format("tff");
+	}
+} @else if $cyrillic-font {         // Cyrillic font-faces
   // Avenir Next Cyr provided by Adrian Frutiger and Akira Kobayashi.
   // Downloaded from `https://www.cufonfonts.com/font/avenir-next-cyr`
   @font-face {
@@ -1329,7 +1354,9 @@ footer.ty-footer {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('ursine/night.png') no-repeat 45% 90% transparent;
+    @if $umbra {
+      background: url('ursine/night.png') no-repeat 45% 90% transparent; // Commenting out as the night background was stuck in polar.
+    }
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;

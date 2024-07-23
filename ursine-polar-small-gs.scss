@@ -1,0 +1,18 @@
+@import 'ursine-polar-gs';
+
+body {
+  font-size: .8em;
+}
+
+h1 {
+  page-break-before: always;
+}
+
+#write {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.CodeMirror {
+  font-size: .8em !important;
+}
